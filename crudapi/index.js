@@ -1,32 +1,46 @@
-const express = require('express')
-const app = express()
-let cors = require("cors")
-let zod = require("zod")
-app.use(express.json())
-app.listen(3000)
-app.use(cors())
+const express = require("express");
+const app = express();
+app.listen(3000);
+app.use(express.json());
 
-app.get("/list",(req,res)=>{
-    res.json("done")
+let data = [];
+
+app.post("/tasks", (req, res) => {
+  // let title = req.body.title
+  // let desc= req.body.desc
+  let { title, desc } = req.body;
+  let id= data.length+1
+  
+  if (title === "" || desc === "") {
+    res.json("put some values");
+  } else {
+    data.push({ id,title, desc });
+    res.status(201).json(data);
+  }
+})
+app.get("/tasks", (req, res) => {
+    let status = req.query.status
+      let fil = data.filter((value)=> {
+        return value.status==status
+      })
+      res.status(200).json({fil})
+})
+app.get("/tasks/:id",(req,res)=>{
+    let id = req.params.id
+    let fil = data.filter((value)=> {
+        return value.id==id
+      })
+      if(fil){
+        res.json({fil})
+      }else{
+        res.status(404).json("Not Found")
+      }
 })
 
-app.post("/add",(req,res)=>{
-    let name = req.body.name
-    let mySchema = zod.string().max(3).min(2);
-    let ans = mySchema.safeParse(name)
-    res.send(ans)
+app.put("/tasks/id",(req,res)=>{
+
 })
 
-app.put("/edit",(req,res)=>{
+app.delete("/tasks/:id",(req,res)=>{
 
-}) 
-
-app.delete("/delete",(req,res)=>{
-    res.send("done")
 })
-
-// app.use((err, req, res, next)=>{
-//     // console.error(err.stack);
-//     console.log(err)
-//     res.status(500).json({ error: 'Internal Server Error' })
-// })
