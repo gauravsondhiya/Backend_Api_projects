@@ -6,10 +6,9 @@ app.use(express.json());
 let data = [];
 
 app.post("/tasks", (req, res) => {
-  // let title = req.body.title
-  // let desc= req.body.desc
+  
   let { title, desc } = req.body;
-  let id= data.length+1
+  let id = data.length + 1
   
   if (title === "" || desc === "") {
     res.json("put some values");
@@ -37,10 +36,15 @@ app.get("/tasks/:id",(req,res)=>{
       }
 })
 
-app.put("/tasks/id",(req,res)=>{
+app.put("/tasks/:id",(req,res)=>{
 
 })
 
 app.delete("/tasks/:id",(req,res)=>{
-
+    let id = req.params.id
+    let fil = data.filter((value)=>{
+      return value.id != id
+    })
+    data.push(fil)
+    res.json(data)
 })
