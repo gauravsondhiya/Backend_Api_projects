@@ -35,7 +35,7 @@ app.get("/tasks/:id",(req,res)=>{
     let fil = data.filter((value)=> {
         return value.id==id
       })
-    
+      
       if(fil.length==0){
         res.status(404).json("Not Found")
       }else{
@@ -52,7 +52,6 @@ app.put("/tasks/:id", (req, res) => {
     return res.status(404).json({ message: "Task not found!" });
   }
 
-  // Update only provided fields
   if (title) data[taskIndex].title = title;
   if (desc) data[taskIndex].desc = desc;
   if (status) data[taskIndex].status = status;

@@ -1,5 +1,5 @@
 {
-  "name": "crudapi",
+  "name": "requestcounter",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -9,11 +9,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "cors": "^2.8.5",
     "express": "^4.21.2",
-    "mongodb": "^6.15.0",
-    "mongoose": "^8.13.0",
-    "nodemon": "^3.1.9",
-    "zod": "^3.24.2"
+    "nodemon": "^3.1.9"
   }
 }
